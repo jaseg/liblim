@@ -6,6 +6,11 @@ class CRDT:
 	def __init__(self):
 		self._version = 0
 
+	def merge(self, other):
+		""" Merge this object with a remote object. The argument contains the remote object's data deserialized into a
+		dict. """
+		raise NotImplementedError()
+
 	@property
 	def oid(self):
 		...
@@ -26,9 +31,12 @@ class CRDT:
 class Set:
 	def insert(self, obj):
 		...
+
+	def _add_object(self, data):
+		raise NotImplementedError()
 	
-	def sync(self):
-		...
+	def merge(self, other, syncprov):
+		return { key: self._add_object for key in (set(other) - self.keys()) }
 	
 	def __getitem__(self, key):
 		...
@@ -81,9 +89,9 @@ class Immutable:
 	def items():
 		return self._items.items()
 	
-	def sync(self, other):
+	def merge(self, other):
 		# only check for equality.
-		if set(self._items.items()) != set(other._items.items()):
+		if set(self._items.items()) != set(other.items()):
 			raise ValueError("Invalid data in remote immutable!")
 
 
