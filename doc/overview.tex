@@ -41,10 +41,10 @@ Mercurial and Darcs but have not yet seen widespread deployment.
 One possible solution to this problem is what we call Convergent Replicated Data Types (CRDTs). CRDTs have been used by
 computer scientists for at least 40 years. The concept was only formalized and its name coined five years ago in
 \cite{inria09}. Since then, there has been some further research into the formal properties of CRDTs\footnote{See
-\cite{inria11}} and first real-world implementations of the concept using the term \em{CRDT} have appeared\footnote{See
+\cite{inria11}} and first real-world implementations of the concept using the term \emph{CRDT} have appeared\footnote{See
 e.g.\ \cite{riak} resp.\ \cite{riak20-announcement} and \cite{riak-crdt} and \cite{roshi}}.
 
-In 2007, Amazon.com published a paper detailing the architecture of their \em{dynamo} key-value store. From a technical
+In 2007, Amazon.com published a paper detailing the architecture of their \emph{dynamo} key-value store. From a technical
 standpoint, Dynamo's replication system is behaving like a CRDT set implementation.
 %FIXME
 
@@ -53,11 +53,11 @@ concepts that may be used in conjunction with CRDTs to provide useful higher-lev
 possible real-world use cases.
 
 \section{Convergent replication}
-CRDTs have first been defined in \cite{inria09}. \cite{inria09} are using the term \em{CRDT} for \em{Collision-free
-Replicated Data Type} and are distinguishing between \em{CvRDTs} (\em{Convergent Replicated Data Types}) which they are
-also calling \em{State-based CRDTs}, and \em{CmRDTs} (\em{Commutative Replicated Data Types}) which they are also
-calling \em{Operation-based} or \em{Op-based CRDTs}. Since both concepts are shown to be exactly equivalent, we are
-using the acronym \em{CRDT} for either approach and settled on the long form \em{Convergent Replicated Data Type} since
+CRDTs have first been defined in \cite{inria09}. \cite{inria09} are using the term \emph{CRDT} for \emph{Collision-free
+Replicated Data Type} and are distinguishing between \emph{CvRDTs} (\emph{Convergent Replicated Data Types}) which they are
+also calling \emph{State-based CRDTs}, and \emph{CmRDTs} (\emph{Commutative Replicated Data Types}) which they are also
+calling \emph{Operation-based} or \emph{Op-based CRDTs}. Since both concepts are shown to be exactly equivalent, we are
+using the acronym \emph{CRDT} for either approach and settled on the long form \emph{Convergent Replicated Data Type} since
 it is describing both very well and is sufficiently handy.
 
 \subsection{Operation-based CRDTs}
@@ -83,7 +83,8 @@ the subset of changed entities, which is equivalent to the set of operations sin
 
 \section{Possible use cases}
 
-\bibliographystyle{te}
+\bibliographystyle{plain}
+\nocite{*}
 \bibliography{overview}
 
 \end{document}

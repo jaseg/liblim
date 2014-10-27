@@ -1,5 +1,8 @@
 .*.swp
 .*.swo
+.*.swn
 *.aux
 *.log
 *.out
+*.bbl
+*.blg
