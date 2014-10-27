@@ -1,0 +1,83 @@
+\documentclass[12pt,a4paper,notitlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,textwidth=17cm, top=2cm, bottom=3.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{natbib}
+\usepackage{ngerman} 
+\usepackage{amssymb,amsmath}
+\usepackage{listings}
+\usepackage{eurosym}
+\usepackage{wasysym}
+\usepackage{amsthm}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{commath}
+\usepackage{subfigure}
+\usepackage[pdftex]{graphicx,color}
+\usepackage{epstopdf}
+\newcommand{\re}{\text{Re}}
+\newcommand{\im}{\text{Im}}
+\newcommand{\foonote}[1]{\footnote{#1}}
+\newcommand{\degree}{\ensuremath{^\circ}}
+\author{Sebastian Götte und Matti Möll}
+\title{Entwicklung eines Datenbanksynchronisations-Mikroframeworks auf Basis konvergenter, replizierter Datentypen}
+\date{27.10.2014}
+\begin{document}
+\maketitle
+
+\section{History of CDRTs and the current state of research}
+Data synchronisation has been an important area of research for several decades. Recently, discourse has been heightened
+due to increasing parallelism of contemporary system architectures. Traditionally, such systems have either relied on a
+central authority\footnote{See every RDBMS in existence, OpenLDAP and ActiveDirectory, RSS and apt among others} or been
+largely limited to read-only affairs\footnote{See e.g.\ BitTorrent and other classical file sharing systems}.
+
+Well-defined automatic merge strategies to reconcile diverging realities in different network locations have been in
+devlopment for some time now, especially under the aegis of distributed version control systems (DVCSs) such as git,
+Mercurial and Darcs but have not yet seen widespread deployment.
+
+One possible solution to this problem is what we call Convergent Replicated Data Types (CRDTs). CRDTs have been used by
+computer scientists for at least 40 years. The concept was only formalized and its name coined five years ago in
+\cite{inria09}. Since then, there has been some further research into the formal properties of CRDTs\footnote{See
+\cite{inria11}} and first real-world implementations of the concept using the term \em{CRDT} have appeared\footnote{See
+e.g.\ \cite{riak} resp.\ \cite{riak20-announcement} and \cite{riak-crdt} and \cite{roshi}}.
+
+In 2007, Amazon.com published a paper detailing the architecture of their \em{dynamo} key-value store. From a technical
+standpoint, Dynamo's replication system is behaving like a CRDT set implementation.
+%FIXME
+
+We want to give an overview of the history and existing implementations of CRDTs followed by an overview of some
+concepts that may be used in conjunction with CRDTs to provide useful higher-level behavior and end with some exemplary
+possible real-world use cases.
+
+\section{Convergent replication}
+CRDTs have first been defined in \cite{inria09}. \cite{inria09} are using the term \em{CRDT} for \em{Collision-free
+Replicated Data Type} and are distinguishing between \em{CvRDTs} (\em{Convergent Replicated Data Types}) which they are
+also calling \em{State-based CRDTs}, and \em{CmRDTs} (\em{Commutative Replicated Data Types}) which they are also
+calling \em{Operation-based} or \em{Op-based CRDTs}. Since both concepts are shown to be exactly equivalent, we are
+using the acronym \em{CRDT} for either approach and settled on the long form \em{Convergent Replicated Data Type} since
+it is describing both very well and is sufficiently handy.
+
+\subsection{Operation-based CRDTs}
+An op-based CRDT is a data type whose value is defined solely by a set of commutative operations applied to a common
+base state. For illustration, consider an up/down counter as a simple example. The initial state would be $0$ and the
+operations would be to add or subtract a number. The current counter value is defined as the sum of all add/subtract
+operations performed on this instance so far. Since addition is commutative, the order of these operations does not
+matter. In a distributed system, additions and subtractions on the same counter can be performed simultaneously on
+multiple nodes, and the resulting conflict can be resolved by each node telling each other node all operations that have
+been performed on its instance.
+
+A state-based CRDT is a data type which is associated with a partial ordering on its value space. A simple example for a
+state-based CRDT is an add-only set. The associated partial ordering is the subset relation. The merge operation is the
+set union.
+
+\section{Possible directions for research}
+
+\section{Possible use cases}
+
+\bibliographystyle{te}
+\bibliography{overview}
+
+\end{document}
