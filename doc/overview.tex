@@ -17,7 +17,6 @@
 \usepackage{commath}
 \usepackage{subfigure}
 \usepackage[pdftex]{graphicx,color}
-\usepackage{epstopdf}
 \newcommand{\re}{\text{Re}}
 \newcommand{\im}{\text{Im}}
 \newcommand{\foonote}[1]{\footnote{#1}}
@@ -35,33 +34,33 @@ central authority\footnote{See every RDBMS in existence, OpenLDAP and ActiveDire
 largely limited to read-only affairs\footnote{See e.g.\ BitTorrent and other classical file sharing systems}.
 
 Well-defined automatic merge strategies to reconcile diverging realities in different network locations have been in
-devlopment for some time now, especially under the aegis of distributed version control systems (DVCSs) such as git,
+devlopment for some\cite{fleissner06} time now, especially under the aegis of distributed version control systems (DVCSs) such as git,
 Mercurial and Darcs but have not yet seen widespread deployment.
 
 One possible solution to this problem is what we call Convergent Replicated Data Types (CRDTs). CRDTs have been used by
-computer scientists for at least 40 years. The concept was only formalized and its name coined five years ago in
-\cite{inria09}. Since then, there has been some further research into the formal properties of CRDTs\footnote{See
-\cite{inria11}} and first real-world implementations of the concept using the term \em{CRDT} have appeared\footnote{See
-e.g.\ \cite{riak} resp.\ \cite{riak20-announcement} and \cite{riak-crdt} and \cite{roshi}}.
+computer scientists for at least 40 years\cite{shapiro1998}. The concept was only formalized and its name coined five years ago in
+\cite{shapiro1998}. Since then, there has been some further research into the formal properties of CRDTs\footnote{See
+\cite{shapiro1998}} and first real-world implementations\cite{coudert2010} of the concept using the term \emph{CRDT} have
+appeared.
 
-In 2007, Amazon.com published a paper detailing the architecture of their \em{dynamo} key-value store. From a technical
+In 2007, Amazon.com published a paper detailing the architecture\cite{stopfer2010} of their \emph{dynamo} key-value store. From a technical
 standpoint, Dynamo's replication system is behaving like a CRDT set implementation.
 %FIXME
 
-We want to give an overview of the history and existing implementations of CRDTs followed by an overview of some
+We want to give an overview of the history and existing implementations of CRDTs followed\cite{eckert2003} by an overview of some
 concepts that may be used in conjunction with CRDTs to provide useful higher-level behavior and end with some exemplary
 possible real-world use cases.
 
 \section{Convergent replication}
-CRDTs have first been defined in \cite{inria09}. \cite{inria09} are using the term \em{CRDT} for \em{Collision-free
-Replicated Data Type} and are distinguishing between \em{CvRDTs} (\em{Convergent Replicated Data Types}) which they are
-also calling \em{State-based CRDTs}, and \em{CmRDTs} (\em{Commutative Replicated Data Types}) which they are also
-calling \em{Operation-based} or \em{Op-based CRDTs}. Since both concepts are shown to be exactly equivalent, we are
-using the acronym \em{CRDT} for either approach and settled on the long form \em{Convergent Replicated Data Type} since
-it is describing both very well and is sufficiently handy.
+CRDTs have first been defined in \cite{schoenberger2013}. \cite{schoenberge2013} are using the term \emph{CRDT} for \emph{Collision-free
+Replicated Data Type} and are distinguishing between \emph{CvRDTs} (\emph{Convergent Replicated Data Types}) which they are
+also calling \emph{State-based CRDTs}, and \emph{CmRDTs} (\emph{Commutative Replicated Data Types}) which they are also
+calling \emph{Operation-based} or \emph{Op-based CRDTs}\cite{schoenberger2013}. Since both concepts are shown to be exactly equivalent, we are
+using the acronym \emph{CRDT} for either approach and settled on the long form \emph{Convergent Replicated Data Type} since
+it is describing both very well and is sufficiently handy\cite{elrep1e47}.
 
 \subsection{Operation-based CRDTs}
-An op-based CRDT is a data type whose value is defined solely by a set of commutative operations applied to a common
+An op-based CRDT is a data type whose value is defined solely by a set of commutative operations\cite{pariser2011} applied to a common
 base state. For illustration, consider an up/down counter as a simple example. The initial state would be $0$ and the
 operations would be to add or subtract a number. The current counter value is defined as the sum of all add/subtract
 operations performed on this instance so far. Since addition is commutative, the order of these operations does not
@@ -70,20 +69,21 @@ multiple nodes, and the resulting conflict can be resolved by each node telling 
 been performed on its instance.
 
 \subsection{State-based CRDTs}
-A state-based CRDT is a data type which is associated with a partial ordering on its value space. A simple example for a
+A state-based CRDT\cite{whitman2004} is a data type which is associated with a partial ordering on its value space. A simple example for a
 state-based CRDT is an add-only set. The associated partial ordering is the subset relation. The merge operation is the
 set union.
 
 State- and Operation-based CRDTs are equivalent in that each can be used to emulate the other. Most existing
-implementations use a state-based storage, where some do incorporate some op-based-like behavior %FIXME
+implementations use a state-based storage, where some\cite{henne2013} do incorporate some op-based-like behavior %FIXME
 for more efficient sync\footnote{e.g.\ Amazon Dynamo is computing a delta using a Merkle tree and then only transmitting
 the subset of changed entities, which is equivalent to the set of operations since last launch.}.
 
-\section{Possible directions for research}
+%\section{Possible directions for research}
 
-\section{Possible use cases}
+%\section{Possible use cases}
 
-\bibliographystyle{te}
+\bibliographystyle{alpha}
+\nocite{*}
 \bibliography{overview}
 
 \end{document}
