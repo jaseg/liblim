@@ -69,9 +69,15 @@ matter. In a distributed system, additions and subtractions on the same counter 
 multiple nodes, and the resulting conflict can be resolved by each node telling each other node all operations that have
 been performed on its instance.
 
+\subsection{State-based CRDTs}
 A state-based CRDT is a data type which is associated with a partial ordering on its value space. A simple example for a
 state-based CRDT is an add-only set. The associated partial ordering is the subset relation. The merge operation is the
 set union.
+
+State- and Operation-based CRDTs are equivalent in that each can be used to emulate the other. Most existing
+implementations use a state-based storage, where some do incorporate some op-based-like behavior %FIXME
+for more efficient sync\footnote{e.g.\ Amazon Dynamo is computing a delta using a Merkle tree and then only transmitting
+the subset of changed entities, which is equivalent to the set of operations since last launch.}.
 
 \section{Possible directions for research}
 
