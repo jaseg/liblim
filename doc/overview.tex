@@ -79,7 +79,32 @@ implementations use a state-based storage, where some do incorporate some op-bas
 for more efficient sync\footnote{e.g.\ Amazon Dynamo is computing a delta using a Merkle tree and then only transmitting
 the subset of changed entities, which is equivalent to the set of operations since last launch.}.
 
-\section{Possible directions for research}
+\section{Non-exclusive schedule for this project}
+\subsection{Real-world adaption}
+We assume the adaption issue is most likely to be solved by a \emph{useful} API allowing it to possibly be integrated
+into existing systems, on top of an existing database. The API issue is both one of the engineering side and of the user
+interface side, which makes it just a little more complicated since one does not often see a solution satisfying both
+concerns in real projects.
+
+We decided on tackling this issue first as a solution to it serves as a foundation for any further work.
+
+In our opinion, a properly implemented solution would be kept as simple as possible, being but a maximally flexible,
+lightweight microframework, serving as a shim on top of an existing database layer. This would system would only provide
+the elementary protocol logic and synchronization ``magic'' in an attempt to not encumber the user with a variety of
+features better implementations of which can be found in any number of other, \emph{proper} frameworks.
+
+\subsection{Application in untrusted networks}
+CRDTs are a useful building block for a distributed system, however they pose one major problem: By nature, they tend to
+require monotonically increasing amounts of memory. This can be alleviated, but not completely solved by means of
+garbage collection. In the context of a distributed system this means that any untrusted, large-scale architecture will
+be under a serious risk of resource exhaustion attacks. The integration of trust and federation in an untrusted
+large-scale network is an important topic for future research.
+
+One might for example conceive a Kad-like DHT being used for node discovery with a web-of-trust based verification
+process layered on top to prevent certain types of attacks relying on fake network identities.
+
+If there is any time left after finishing the aforementioned microframework to a satisfactory degree, we want to explore
+this angle as much as possible as \emph{this} is where all the \emph{interesting} problems live.
 
 \section{Possible use cases}
 
