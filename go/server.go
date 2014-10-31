@@ -91,7 +91,7 @@ func (p *Protocol) handleRequest() error {
 	case "UCANHAZ":
 		return p.handleUcanhaz(payload)
 	default:
-		log.Println("WTF, what's that?", line)
+		log.Println("WTF dat shit?", line)
 	}
 	return nil
 }
@@ -105,6 +105,7 @@ func (p *Protocol) handleIHaz(line string) error {
 		if line == "" {
 			break
 		}
+		log.Println("Got IHAZ:", line)
 	}
 	return p.sendUcanhaz()
 }
@@ -116,7 +117,7 @@ func (p *Protocol) sendOhai() error {
 
 func (p *Protocol) handleOhai(line string) error {
 	p.ohai = true
-	log.Printf("Got OHAI from %s", line)
+	log.Printf("Got ØHAI from %s", line)
 	return p.sendIhaz()
 }
 
@@ -148,5 +149,5 @@ func Listen(address string) error {
 
 func handleConn(conn net.Conn) {
 	p := &Protocol{Conn: conn}
-	p.Start()
+	log.Println(p.Start())
 }
