@@ -55,6 +55,10 @@ func (p *Protocol) Start() error {
 	return nil
 }
 
+func (p *Protocol) Close() error {
+	return p.proto.Close()
+}
+
 func (p *Protocol) sendIhaz() error {
 	asset, err := json.Marshal(NewRegister("Hello World"))
 	if err != nil {
