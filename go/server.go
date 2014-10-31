@@ -1,4 +1,4 @@
-package derrit
+package liblim
 
 import (
 	"encoding/json"
