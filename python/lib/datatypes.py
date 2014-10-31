@@ -7,9 +7,11 @@ class CRDT:
 		self._version = 0
 
 	def merge(self, other):
-		""" Merge this object with a remote object. The argument contains the remote object's data deserialized into a
-		dict. """
+		""" Merge this object with a remote object. The argument contains the remote object's serialized data """
 		raise NotImplementedError()
+	
+	def serialize(self):
+		...
 
 	@property
 	def oid(self):
