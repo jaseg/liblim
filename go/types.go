@@ -1,8 +1,8 @@
 package derrit
 
 import (
-	"time"
 	"code.google.com/p/go-uuid/uuid"
+	"time"
 )
 
 // Vector Clock Style Version
@@ -13,15 +13,16 @@ type Version struct {
 }
 
 type Crdt struct {
-	Oid       string `json:"oid,string"`
-	Version   Version `json:"version,string"`
-	timestamp time.Time
+	Oid        string  `json:"oid,string"`
+	Version    Version `json:"-"`
+	VersionInt uint    `json:"version,int"`
+	timestamp  time.Time
 }
 
 func newCrdt() *Crdt {
 	return &Crdt{
-		Oid: uuid.NewRandom().String(),
-		Version: Version{Perspective: make(map[string] uint64)},
+		Oid:       uuid.NewRandom().String(),
+		Version:   Version{Perspective: make(map[string]uint64)},
 		timestamp: time.Now(),
 	}
 }
@@ -52,7 +53,7 @@ func NewRegister(val interface{}) *Register {
 	c := newCrdt()
 	return &Register{
 		Crdt: c,
-		Val: val,
+		Val:  val,
 	}
 }
 

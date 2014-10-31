@@ -1,13 +1,16 @@
 package derrit
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"log"
 	"net"
 	"net/textproto"
+	"os"
 	"strings"
-	"encoding/json"
+
+	"code.google.com/p/go-uuid/uuid"
 )
 
 type Protocol struct {
