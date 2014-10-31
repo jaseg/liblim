@@ -13,6 +13,16 @@ import (
 	"code.google.com/p/go-uuid/uuid"
 )
 
+var InstanceId string
+
+func init() {
+	InstanceId = os.Getenv("LIBLIM_INSTANCE_ID")
+	tmpUuid := uuid.Parse(InstanceId)
+	if tmpUuid == nil {
+		InstanceId = uuid.NewRandom().String()
+	}
+}
+
 type Protocol struct {
 	Conn  net.Conn
 	proto *textproto.Conn
@@ -96,7 +106,7 @@ func (p *Protocol) handleIHaz(line string) error {
 }
 
 func (p *Protocol) sendOhai() error {
-	_, err := p.proto.Cmd("ØHAI 4d1e7ca8-a6d6-4b0c-9f2b-2ade9f2269ab")
+	_, err := p.proto.Cmd("ØHAI " + InstanceId)
 	return err
 }
 
