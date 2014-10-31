@@ -66,8 +66,8 @@ func (p *Protocol) handleRequest() error {
 	cmd := line[:cmddel]
 	log.Printf("Got %q command", cmd)
 	switch cmd {
-	case "OHAI":
-		return p.handleOhai(line[cmddel+1:])
+	case "ØHAI":
+		return p.handleOhai(payload)
 	case "IHAZ":
 		return p.handleIHaz(line[cmddel+1:])
 	case "UCANHAZ":
@@ -93,7 +93,7 @@ func (p *Protocol) handleIHaz(line string) error {
 }
 
 func (p *Protocol) sendOhai() error {
-	_, err := p.proto.Cmd("OHAI 4d1e7ca8-a6d6-4b0c-9f2b-2ade9f2269ab")
+	_, err := p.proto.Cmd("ØHAI 4d1e7ca8-a6d6-4b0c-9f2b-2ade9f2269ab")
 	return err
 }
 
