@@ -51,23 +51,6 @@ func (s *Set) Get(oid string) interface{} {
 	return nil
 }
 
-type Register struct {
-	*Crdt
-	Val interface{}
-}
-
-func NewRegister(val interface{}) *Register {
-	c := newCrdt()
-	return &Register{
-		Crdt: c,
-		Val:  val,
-	}
-}
-
-func (r *Register) Get() interface{} {
-	return r.Val
-}
-
 type Immutable struct {
 	Crdt
 	Val interface{}
