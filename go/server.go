@@ -98,7 +98,6 @@ func (p *Protocol) handleRequest() error {
 
 func (p *Protocol) handleIHaz(line string) error {
 	for {
-		handleIHazLine(line)
 		line, err := p.proto.ReadLine()
 		if err != nil {
 			return err
@@ -107,7 +106,7 @@ func (p *Protocol) handleIHaz(line string) error {
 			break
 		}
 	}
-	return nil
+	return p.sendUcanhaz()
 }
 
 func (p *Protocol) sendOhai() error {
@@ -121,8 +120,14 @@ func (p *Protocol) handleOhai(line string) error {
 	return p.sendIhaz()
 }
 
-func handleIHazLine(line string) {
-	log.Println("Got line:", line)
+func (p *Protocol) handleUcanhaz(line string) error {
+	log.Println("Got UCANHAZ:", line)
+	return nil
+}
+
+func (p *Protocol) sendUcanhaz() error {
+	_, err := p.proto.Cmd("UCANHAZ bsfgsdafgdsf")
+	return err
 }
 
 func Listen(address string) error {
