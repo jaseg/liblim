@@ -81,14 +81,15 @@ func (p *Protocol) handleRequest() error {
 		return fmt.Errorf("No Command given")
 	}
 	cmd := line[:cmddel]
+	payload := line[cmddel+1:]
 	log.Printf("Got %q command", cmd)
 	switch cmd {
 	case "ØHAI":
 		return p.handleOhai(payload)
 	case "IHAZ":
-		return p.handleIHaz(line[cmddel+1:])
+		return p.handleIHaz(payload)
 	case "UCANHAZ":
-		break
+		return p.handleUcanhaz(payload)
 	default:
 		log.Println("WTF, what's that?", line)
 	}
