@@ -2,7 +2,14 @@ package liblim
 
 import (
 	"code.google.com/p/go-uuid/uuid"
+	"errors"
+	"reflect"
 	"time"
+)
+
+var (
+	ErrInvalidType = errors.New("type is not supported")
+	ErrMergeCompat = errors.New("cannot merge incompatible Types")
 )
 
 // Vector Clock Style Version
@@ -64,4 +71,10 @@ func (r *Register) Get() interface{} {
 type Immutable struct {
 	Crdt
 	Val interface{}
+}
+
+func sameKind(l, r interface{}) bool {
+	lk := reflect.TypeOf(l).Kind()
+	rk := reflect.TypeOf(r).Kind()
+	return lk == rk
 }
