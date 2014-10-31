@@ -20,17 +20,17 @@ type Version struct {
 }
 
 type Crdt struct {
-	Oid        string  `json:"oid,string"`
+	Oid        string  `json:"oid"`
 	Version    Version `json:"-"`
 	VersionInt uint    `json:"version,int"`
-	timestamp  time.Time
+	mtime      time.Time
 }
 
 func newCrdt() *Crdt {
 	return &Crdt{
-		Oid:       uuid.NewRandom().String(),
-		Version:   Version{Perspective: make(map[string]uint64)},
-		timestamp: time.Now(),
+		Oid:     uuid.NewRandom().String(),
+		Version: Version{Perspective: make(map[string]uint64)},
+		mtime:   time.Now(),
 	}
 }
 
