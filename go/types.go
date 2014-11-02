@@ -34,23 +34,6 @@ func newCrdt() *Crdt {
 	}
 }
 
-type Set struct {
-	Crdt
-	Elements map[string]interface{}
-}
-
-func (s *Set) Add(oid string, val interface{}) {
-	s.Elements[oid] = val
-}
-
-func (s *Set) Get(oid string) interface{} {
-	val, ok := s.Elements[oid]
-	if ok {
-		return val
-	}
-	return nil
-}
-
 type Immutable struct {
 	Crdt
 	Val interface{}
