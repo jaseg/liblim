@@ -16,7 +16,7 @@ func twoNewRegisters(l, r interface{}) (*Register, *Register) {
 func TestRegisterMergeInt(t *testing.T) {
 	l, r := twoNewRegisters(123456, 654321)
 	l.Merge(r)
-	if l.Val.(int) != 654321 {
+	if l.Val().(int) != 654321 {
 		t.Fail()
 	}
 }
@@ -24,12 +24,12 @@ func TestRegisterMergeInt(t *testing.T) {
 func TestRegisterMergeFloat(t *testing.T) {
 	l, r := twoNewRegisters(float32(123456.654321), float32(654321.123456))
 	l.Merge(r)
-	if l.Val.(float32) != 654321.123456 {
+	if l.Val().(float32) != 654321.123456 {
 		t.Fail()
 	}
 	l, r = twoNewRegisters(123456.654321, 654321.123456)
 	l.Merge(r)
-	if l.Val.(float64) != 654321.123456 {
+	if l.Val().(float64) != 654321.123456 {
 		t.Fail()
 	}
 }
@@ -37,7 +37,7 @@ func TestRegisterMergeFloat(t *testing.T) {
 func TestRegisterMergeString(t *testing.T) {
 	l, r := twoNewRegisters("Welt Hallo", "Hallo Welt")
 	l.Merge(r)
-	if l.Val.(string) != "Hallo Welt" {
+	if l.Val().(string) != "Hallo Welt" {
 		t.Fail()
 	}
 }
@@ -45,7 +45,7 @@ func TestRegisterMergeString(t *testing.T) {
 func TestRegisterMergeByteSlice(t *testing.T) {
 	l, r := twoNewRegisters([]byte("Welt Hallo"), []byte("Hallo Welt"))
 	l.Merge(r)
-	if !bytes.Equal(l.Val.([]byte), []byte("Hallo Welt")) {
+	if !bytes.Equal(l.Val().([]byte), []byte("Hallo Welt")) {
 		t.Fail()
 	}
 }
