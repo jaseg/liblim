@@ -28,7 +28,7 @@ type Crdt struct {
 
 func newCrdt() *Crdt {
 	return &Crdt{
-		Oid:     uuid.NewRandom().String(),
+		Oid:     uuid.New(),
 		Version: Version{Perspective: make(map[string]uint64)},
 		mtime:   time.Now(),
 	}
