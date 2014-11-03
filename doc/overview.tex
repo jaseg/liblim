@@ -3,19 +3,14 @@
 \usepackage[a4paper,textwidth=17cm, top=2cm, bottom=3.5cm]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage{natbib}
-\usepackage{ngerman} 
 \usepackage{amssymb,amsmath}
 \usepackage{listings}
 \usepackage{eurosym}
 \usepackage{wasysym}
 \usepackage{amsthm}
 \usepackage{tabularx}
-\usepackage{multirow}
-\usepackage{multicol}
 \usepackage{hyperref}
 \usepackage{tabularx}
-\usepackage{commath}
-\usepackage{subfigure}
 \usepackage[pdftex]{graphicx,color}
 \usepackage{epstopdf}
 \newcommand{\re}{\text{Re}}
@@ -101,8 +96,7 @@ garbage collection. In the context of a distributed system this means that any u
 be under a serious risk of resource exhaustion attacks. The integration of trust and federation in an untrusted
 large-scale network is an important topic for future research.
 
-% cite kademlia here
-One might for example conceive a Kad-like DHT being used for node discovery with a web-of-trust based verification
+One might for example conceive a Kad-like DHT\cite{kademlia} being used for node discovery with a web-of-trust based verification
 process layered on top to prevent certain types of attacks relying on fake network identities.
 
 If there is any time left after finishing the aforementioned microframework to a satisfactory degree, we want to explore
@@ -112,31 +106,26 @@ this angle as much as possible for \emph{this} is where all the \emph{interestin
 
 \emph{...accompanied by some subjective classification for interestingness}
 
-\paragraph{Cyber-Physical Systems:} The Internet of Things requires massively scalable solutions to Machine-to-Machine
+\paragraph{Cyber-Physical Systems:} The Internet of Things requires massively scalable solutions for Machine-to-Machine
 communication and data synchronization. \emph{liblim} is ideally suited to these kinds of applications due to its strong
-tolerance to unstable network conditions and guaranteed eventual convergence.
+tolerance towards unstable network conditions and guaranteed eventual convergence.
 
 \paragraph{Collaborative document editing:} Though this one seems to have attracted quite some attention in the past, we
-consider it sub-par revolutionary and it seems collarborative editing schemes often have a certain smell to their code
-bases.
+consider it sub-par revolutionary and it seems collarborative editing schemes have been extensivly studied\cite{inria11}.
 
 \paragraph{Distributed microblogging,} or, depending on the choice of parameters and resulting balance between system
-\emph{capacity} and \emph{latency}, macroblogging: We think this might have some merit, since for one people seem to
-actually be using systems of this kind, and it seems kind of simple on the surface.
+\emph{capacity} and \emph{latency}, macroblogging: We think this might have some merit, since systems of this kind do
+have some real-world adoption and it looks simple on the surface.
 
 \paragraph{Distributed public discussion,} or, \emph{derrit} as we want to call this, meaning a distributed platform
 that can be used to exchange public comments such as pop-cultural references and pictures of cute kittens, sorted by
 theme and the comments' semantic relationship. We would ultimately like to have this system, but as of now we consider
 it too complex to be implemented on a whim.
 
-\paragraph{Distributed just-another-android-apps:} About 50\% of our group were found to be interested in apps
-doing ordinary things like asking the user questions from virtual flash cards being able to synchronize between devices
-without regular crashes and data loss. We think this option might be worthwhile to follow up on in the future, but for
-now we will just try to convince our friends and distant relatives to work on these due to a lack of lifespan and
-complex eclipse installation procedures.
+\paragraph{Cloud connectivity for mobile apps:} Many existing mobile apps, even some that are already cloud-connected
+would benefit from a CRDT-based database layer for cross-device synchronization.
 
 \bibliographystyle{plain}
-\nocite{*}
 \bibliography{overview}
 
 \end{document}
